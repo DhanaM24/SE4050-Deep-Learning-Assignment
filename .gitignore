@@ -1,2 +1,9 @@
 /dataset/
 /venv/
+assignment document + marking guide.pdf
+.env
+__pycache__/
+.ipynb_checkpoints/
+results/models/*.keras
+results/models/*.npz
+results/models/*.weights.h5

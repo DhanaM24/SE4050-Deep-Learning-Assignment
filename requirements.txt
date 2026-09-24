@@ -1,6 +1,10 @@
 tensorflow
 matplotlib
 numpy
+pandas
 scikit-learn
 seaborn
+pillow
+python-dotenv
 ipykernel
+nbconvert

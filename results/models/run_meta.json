@@ -1,0 +1,26 @@
+{
+  "config": {
+    "data_dir": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\dataset",
+    "img_size": 224,
+    "batch_size": 64,
+    "num_classes": 4,
+    "class_names": [
+      "D00",
+      "D10",
+      "D20",
+      "D40"
+    ],
+    "seed": 42,
+    "test_size": 0.15,
+    "val_size": 0.15,
+    "head_epochs": 100,
+    "head_lr": 0.001,
+    "dropout": 0.5,
+    "patience_earlystop": 12,
+    "patience_lr": 5,
+    "checkpoint_path": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\results\\models\\vgg16_multilabel.keras",
+    "features_cache": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\results\\models\\vgg16_features.npz"
+  },
+  "split_md5": "72b91db9a4fb1d6cdb6a90112d35851a",
+  "feature_key": "fcc2019e4dbdca296b05a93ad298d311"
+}

@@ -1,0 +1,18 @@
+<annotation>
+  <folder>images</folder>
+  <filename>India_000214.jpg</filename>
+  <size>
+    <depth>3</depth>
+    <width>720</width>
+    <height>720</height>
+  </size>
+  <object>
+    <name>D44</name>
+    <bndbox>
+      <xmin>269</xmin>
+      <ymin>564</ymin>
+      <xmax>338</xmax>
+      <ymax>653</ymax>
+    </bndbox>
+  </object>
+</annotation>

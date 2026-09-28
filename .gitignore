@@ -7,3 +7,6 @@ __pycache__/
 results/models/*.keras
 results/models/*.npz
 results/models/*.weights.h5
+results/cache/
+src/models/*.keras
+src/models/*.weights.h5

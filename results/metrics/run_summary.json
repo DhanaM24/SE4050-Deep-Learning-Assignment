@@ -24,14 +24,14 @@
     "trainable_params": 132356,
     "frozen_params": 14714688
   },
-  "feature_seconds": 277.5,
-  "train_seconds": null,
+  "feature_seconds": 313.8,
+  "train_seconds": 14.3,
   "computational": {
     "total_params": 14847044,
     "trainable_params": 132356,
     "frozen_params": 14714688,
-    "feature_extraction_seconds": 277.5,
-    "training_seconds": null,
+    "feature_extraction_seconds": 313.8,
+    "training_seconds": 14.3,
     "epochs_run": 30,
     "best_epoch": 18,
     "checkpoint_mb": 60.55,

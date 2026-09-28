@@ -1,0 +1,5 @@
+venv/
+data/*.tar.gz
+data/*_file_list.txt
+__pycache__/
+.ipynb_checkpoints/

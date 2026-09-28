@@ -1,5 +1,7 @@
-# Trained model files
-*.keras
-*.h5
-*.hdf5
-*.ckpt
+# Dataset files
+data/*.tar.gz
+data/extracted/
+data/cnn_train/
+
+# Temporary files
+large-files.txt

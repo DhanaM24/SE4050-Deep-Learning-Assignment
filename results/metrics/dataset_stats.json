@@ -1,7 +1,7 @@
 {
-  "total_images": 18437,
+  "total_images": 15830,
   "per_split": {
-    "train": 13142,
+    "train": 10535,
     "test2": 2664,
     "test1": 2631
   },
@@ -19,22 +19,17 @@
     "Japan": {
       "test1": 1313,
       "test2": 1314,
-      "train": 2607
+      "train": 0
     }
   },
   "image_sizes": {
-    "540.0x540.0": 48,
-    "600.0x600.0": 8607,
-    "720.0x720.0": 9665,
-    "1024.0x1024.0": 88,
-    "1080.0x1080.0": 28
+    "540x540": 28,
+    "600x600": 6081,
+    "720x720": 9665,
+    "1024x1024": 44,
+    "1080x1080": 12
   },
-  "corrupt_images": [
-    {
-      "path": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\dataset\\train\\Japan\\images\\Japan_004643.jpg",
-      "error": "OSError: image file is truncated (83 bytes not processed)"
-    }
-  ],
+  "corrupt_images": [],
   "exact_duplicate_groups": [],
   "labels": {
     "annotated_images": 10535,
@@ -69,7 +64,7 @@
     }
   },
   "notes": [
-    "Damage labels are only available for train/Czech and train/India (VOC xml annotations). train/Japan labels were lost when the upstream train.tar.gz download was truncated; test1/test2 ship without damage annotations.",
+    "Damage labels are only available for train/Czech and train/India (VOC xml annotations). The upstream train.tar.gz download was truncated and the Japan labels were never recovered, so the unused Japan images were removed from the local dataset; test1/test2 ship without damage annotations.",
     "test1/test2 still carry source-country folder names and are used only for dataset description, not for damage evaluation."
   ]
 }

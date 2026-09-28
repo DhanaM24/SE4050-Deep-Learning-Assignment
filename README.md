@@ -58,17 +58,18 @@ images so that the following exists (structure described in the original
 dataset/
   train/Czech/{images,labels}/     # XML labels
   train/India/{images,labels}/     # XML labels
-  train/Japan/images/              # labels lost in the truncated train.tar.gz
   test1/ test2/                    # images only, no damage annotations
   train/label_map.pbtxt            # D00/D10/D20/D40 class map
 ```
 
 Notes recorded during validation (`results/metrics/dataset_stats.json`):
 
-* 18,437 extracted images; 1 corrupt file (`train/Japan/images/Japan_004643.jpg`,
-  reported, not deleted).
-* `train.tar.gz` is truncated upstream — Japanese labels and some files are
-  missing, so supervised training uses **Czech + India only** (4,295 labeled
+* 15,830 extracted images, all intact (0 corrupt, 0 exact duplicates). This is
+  the original 18,437 minus the unused `train/Japan` extraction (2,607 images),
+  which was removed locally: validation had reported its one corrupt file
+  (`Japan_004643.jpg`) and the images cannot be supervised (see below).
+* `train.tar.gz` is truncated upstream — the Japanese labels were never
+  recovered, so supervised training uses **Czech + India only** (4,295 labeled
   images).
 * `test1`/`test2` ship no damage annotations and are therefore description-only;
   all reported metrics use the held-out **test** split of the labeled set.

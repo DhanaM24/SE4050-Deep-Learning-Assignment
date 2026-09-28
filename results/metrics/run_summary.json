@@ -1,12 +1,12 @@
 {
   "dataset": {
-    "total_images": 18437,
+    "total_images": 15830,
     "per_split": {
-      "train": 13142,
+      "train": 10535,
       "test2": 2664,
       "test1": 2631
     },
-    "corrupt": 1,
+    "corrupt": 0,
     "exact_duplicate_groups": 0
   },
   "leakage": {
@@ -25,13 +25,13 @@
     "frozen_params": 14714688
   },
   "feature_seconds": 277.5,
-  "train_seconds": 13.9,
+  "train_seconds": null,
   "computational": {
     "total_params": 14847044,
     "trainable_params": 132356,
     "frozen_params": 14714688,
     "feature_extraction_seconds": 277.5,
-    "training_seconds": 13.9,
+    "training_seconds": null,
     "epochs_run": 30,
     "best_epoch": 18,
     "checkpoint_mb": 60.55,

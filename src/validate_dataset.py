@@ -203,9 +203,10 @@ def main() -> dict:
         "labels": label_stats,
         "notes": [
             "Damage labels are only available for train/Czech and train/India "
-            "(VOC xml annotations). train/Japan labels were lost when the "
-            "upstream train.tar.gz download was truncated; test1/test2 ship "
-            "without damage annotations.",
+            "(VOC xml annotations). The upstream train.tar.gz download was "
+            "truncated and the Japan labels were never recovered, so the "
+            "unused Japan images were removed from the local dataset; "
+            "test1/test2 ship without damage annotations.",
             "test1/test2 still carry source-country folder names and are used "
             "only for dataset description, not for damage evaluation.",
         ],

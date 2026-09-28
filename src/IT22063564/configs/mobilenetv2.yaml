@@ -1,0 +1,25 @@
+# MobileNetV2 (Sandler et al., 2018) - ImageNet-pretrained, two-phase transfer learning.
+
+model: mobilenetv2
+
+architecture:
+  weights: imagenet
+  alpha: 1.0            # width multiplier (1.0 = standard 3.5M-param backbone)
+  dropout: 0.3
+  dense_units: 128      # small hidden layer before the softmax; 0 disables it
+  l2: 0.0001
+
+augmentation:
+  horizontal_flip: true # safe: a mirrored crack keeps its orientation class
+  rotation: 0.05        # +-18 deg only; 90 deg rotations would turn D00 into D10
+  zoom: 0.10
+  contrast: 0.10
+
+phase1:                 # train only the new head, backbone frozen
+  epochs: 10
+  learning_rate: 0.001
+
+phase2:                 # fine-tune the top of the backbone
+  epochs: 20
+  learning_rate: 0.00001
+  unfreeze_from_layer: 100   # layers [100:] of 154 are trainable (last ~5 inverted-residual blocks)

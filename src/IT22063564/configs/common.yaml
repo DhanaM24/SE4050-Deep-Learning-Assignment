@@ -1,0 +1,20 @@
+# Shared settings used by ALL four models so the comparison is fair.
+# Change these only as a group decision - every model must be retrained afterwards.
+
+seed: 42
+
+data:
+  raw_dir: data/raw/train            # extracted from data/train.tar.gz (RDD2020)
+  processed_dir: data/processed      # crops + splits.csv are written here
+  countries: [Czech, India, Japan]   # countries missing on disk are skipped with a warning
+  classes: [D00, D10, D20, D40]      # official RDD2020 label map; other tags (D01, D44, ...) are dropped
+  crop_context: 0.15                 # extra context added around each box (fraction of box size)
+  min_box_side: 20                   # boxes smaller than this (px) are discarded as unreadable
+  crop_size: 224                     # crops are saved as square images of this size
+  split: {train: 0.70, val: 0.15, test: 0.15}   # split is done per IMAGE, never per crop
+
+train:
+  img_size: 224
+  batch_size: 32
+  use_class_weights: true
+  early_stopping_patience: 5

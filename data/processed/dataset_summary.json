@@ -1,0 +1,42 @@
+{
+  "n_images": 4234,
+  "n_crops": 8334,
+  "countries": {
+    "Czech": 1022,
+    "India": 3212
+  },
+  "crops_per_split_and_class": {
+    "test": {
+      "D00": 354,
+      "D10": 52,
+      "D20": 321,
+      "D40": 452
+    },
+    "train": {
+      "D00": 1768,
+      "D10": 257,
+      "D20": 1530,
+      "D40": 2337
+    },
+    "val": {
+      "D00": 396,
+      "D10": 62,
+      "D20": 331,
+      "D40": 474
+    }
+  },
+  "images_per_split": {
+    "test": 636,
+    "train": 2963,
+    "val": 635
+  },
+  "dropped": {
+    "too_small": 242,
+    "label_D44": 1062,
+    "label_D01": 179,
+    "label_D11": 45,
+    "label_D50": 28,
+    "label_D43": 57,
+    "label_D0w0": 1
+  }
+}

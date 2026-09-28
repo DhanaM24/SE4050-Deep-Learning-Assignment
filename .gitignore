@@ -10,3 +10,21 @@ results/models/*.weights.h5
 results/cache/
 src/models/*.keras
 src/models/*.weights.h5
+# dataset archives and derived data (too large for git - see README for download)
+data/*.tar.gz
+data/raw/
+data/processed/crops/
+
+# trained weights (share via Drive; metrics/figures ARE committed)
+results/models/*.keras
+results/models/*.h5
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+data/*.zip
+data/FileStructure.txt
+.tar.gz
+

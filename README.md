@@ -1,10 +1,12 @@
 # SE4050 Deep Learning 2026 — Multi-Label Road-Damage Classification (VGG16)
 
 Multi-label classifier for the four road-damage classes in `label_map.pbtxt`
-(**D00** longitudinal crack, **D10** alligator crack, **D20** pothole,
-**D40** transverse crack) built as part of the group project. This repository
-contains the **VGG16 experiment** (`notebooks/VGG_16.ipynb`) plus the shared
-data validation and leakage-safe split utilities used by every group model.
+(**D00** longitudinal crack, **D10** transverse crack, **D20** alligator crack,
+**D40** pothole) built as part of the group project. The whole
+pipeline - validation, leakage-safe split, VGG16 training, evaluation and
+inference - lives in one self-contained notebook,
+`notebooks/VGG_16.ipynb`; the shared split manifest
+(`results/metrics/split_manifest.csv`) is used by every group model.
 
 Headline result (frozen ImageNet VGG16 + trained head, single seed 42):
 
@@ -16,18 +18,16 @@ Headline result (frozen ImageNet VGG16 + trained head, single seed 42):
 | subset accuracy | 0.481 | 0.389 |
 
 Full numbers, figures and error analysis are produced by running the notebook;
-artifacts are written to `results/`.
+metrics and figures go to `results/`, saved models to `src/models/`.
 
 ## Repository layout
 
 ```
 dataset/                  # extracted dataset (git-ignored, see below)
-notebooks/VGG_16.ipynb    # main experiment: EDA -> model -> training -> evaluation
-src/config.py             # central config loaded from .env
-src/utils.py              # seeding, json helpers, timer, plotting style
-src/validate_dataset.py   # integrity/duplicate scan + EDA figures
-src/dataset.py            # cluster-grouped, leakage-safe train/val/test split
-results/                  # metrics json, figures, predictions, model artifacts
+notebooks/VGG_16.ipynb    # the whole pipeline: validation -> split -> model -> evaluation -> inference
+src/models/               # trained model + head weights + run metadata (git-ignored)
+results/cache/            # precomputed VGG16 feature caches (git-ignored)
+results/                  # metrics json, figures, predictions, error analysis
 .env.example              # environment template (copy to .env)
 requirements.txt          # pinned dependencies
 ```
@@ -77,26 +77,26 @@ Notes recorded during validation (`results/metrics/dataset_stats.json`):
 ## Execution (in order)
 
 ```powershell
-# 1. validate every image + build EDA figures (~5 min)
-python -m src.validate_dataset
-
-# 2. build the leakage-safe split (grouped by near-duplicate cluster) (~1 min)
-python -m src.dataset
-
-# 3. register the kernel once, then run the notebook end-to-end (~10 min)
+# 1. register the kernel once
 python -m ipykernel install --user --name se4050-venv
+
+# 2. run the notebook end-to-end (~10 min):
+#    validates the dataset, builds the split, extracts features, trains,
+#    evaluates, tunes thresholds, plots figures, classifies a sample image
 python -m nbconvert --to notebook --execute --inplace notebooks\VGG_16.ipynb `
     --ExecutePreprocessor.kernel_name=se4050-venv --ExecutePreprocessor.timeout=2400
 ```
 
-The notebook itself is self-contained: it re-validates, re-splits
-(`force=True`), extracts VGG16 features with caching, trains the head,
-evaluates on the untouched test set, tunes thresholds **on validation only**,
-performs the error analysis and writes all artifacts to `results/`.
+The notebook is self-contained (config, validation and split code are all
+inside it): it re-validates, re-splits (`force=True`), extracts VGG16 features
+with caching, trains the head, evaluates on the untouched test set, tunes
+thresholds **on validation only**, performs the error analysis, and writes
+metrics/figures to `results/` and the saved model to `src/models/`.
 
 ## Reproducibility
 
-* Single global seed `42` (Python / NumPy / TensorFlow) via `src/config.py`.
+* Single global seed `42` (Python / NumPy / TensorFlow), set in the notebook
+  setup section from `.env`.
 * Split manifest: `results/metrics/split_manifest.csv` — shared source of
   truth for all group models; leakage report: `split_report.json`
   (0 clusters spanning splits, 0 duplicate paths).
@@ -115,3 +115,5 @@ performs the error analysis and writes all artifacts to `results/`.
 | `results/metrics/run_summary.json` | config, timings, parameter counts |
 | `results/figures/` | EDA, learning curves, ROC, confusion matrices |
 | `results/error_analysis/` | FN/FP counts per class, confident-error grid |
+| `src/models/vgg16_multilabel.keras` | full saved model (backbone + trained head) |
+| `src/models/vgg16_head.weights.h5` | best head weights (validation AUC) |

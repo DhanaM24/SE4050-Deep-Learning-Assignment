@@ -117,3 +117,4 @@ metrics/figures to `results/` and the saved model to `src/models/`.
 | `results/error_analysis/` | FN/FP counts per class, confident-error grid |
 | `src/models/vgg16_multilabel.keras` | full saved model (backbone + trained head) |
 | `src/models/vgg16_head.weights.h5` | best head weights (validation AUC) |
+# SE4050-Deep-Learning-Assignment

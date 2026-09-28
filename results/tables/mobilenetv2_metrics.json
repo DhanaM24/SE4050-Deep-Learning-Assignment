@@ -1,0 +1,67 @@
+{
+  "train": {
+    "accuracy": 0.8304480651731161,
+    "precision_macro": 0.773533336799201,
+    "recall_macro": 0.8527788833832152,
+    "f1_macro": 0.797950334635965,
+    "precision_weighted": 0.8423728044266015,
+    "recall_weighted": 0.8304480651731161,
+    "f1_weighted": 0.8320322621526567,
+    "roc_auc_macro_ovr": 0.9685344502793662,
+    "n_samples": 5892
+  },
+  "val": {
+    "accuracy": 0.7862232779097387,
+    "precision_macro": 0.7237244989556577,
+    "recall_macro": 0.772243176093351,
+    "f1_macro": 0.7382115042816555,
+    "precision_weighted": 0.7981246932757137,
+    "recall_weighted": 0.7862232779097387,
+    "f1_weighted": 0.7873777366988006,
+    "roc_auc_macro_ovr": 0.9370499416331619,
+    "n_samples": 1263
+  },
+  "test": {
+    "accuracy": 0.8006785411365565,
+    "precision_macro": 0.7438057781885543,
+    "recall_macro": 0.7988549417784323,
+    "f1_macro": 0.7632425998015497,
+    "precision_weighted": 0.8094015842872718,
+    "recall_weighted": 0.8006785411365565,
+    "f1_weighted": 0.8026258976814681,
+    "roc_auc_macro_ovr": 0.9489419088512975,
+    "n_samples": 1179,
+    "confusion_matrix": [
+      [
+        257,
+        21,
+        45,
+        31
+      ],
+      [
+        4,
+        42,
+        5,
+        1
+      ],
+      [
+        31,
+        10,
+        260,
+        20
+      ],
+      [
+        24,
+        6,
+        37,
+        385
+      ]
+    ]
+  },
+  "efficiency": {
+    "total_params": 2422468,
+    "model_size_mb": 26.348075,
+    "latency_ms_per_image": 160.12051091999865,
+    "device": "GPU"
+  }
+}

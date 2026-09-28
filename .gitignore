@@ -1,7 +1,0 @@
-# Dataset files
-data/*.tar.gz
-data/extracted/
-data/cnn_train/
-
-# Temporary files
-large-files.txt

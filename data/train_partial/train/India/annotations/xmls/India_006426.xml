@@ -1,0 +1,22 @@
+<annotation>
+	<folder>images</folder>
+	<filename>India_006426.jpg</filename>
+	<size>
+		<width>720</width>
+		<height>720</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>D00</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>307</xmin>
+			<ymin>505</ymin>
+			<xmax>334</xmax>
+			<ymax>637</ymax>
+		</bndbox>
+	</object>
+</annotation>

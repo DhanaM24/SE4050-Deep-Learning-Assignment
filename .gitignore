@@ -1,19 +1,7 @@
-data/train_corrupted.tar.gz
-# dataset archives and derived data (too large for git - see README for download)
+# Dataset files
 data/*.tar.gz
-data/raw/
-data/processed/crops/
+data/extracted/
+data/cnn_train/
 
-# trained weights (share via Drive; metrics/figures ARE committed)
-results/models/*.keras
-results/models/*.h5
-
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-.venv/
-venv/
-data/*.zip
-data/FileStructure.txt
-.tar.gz
-
+# Temporary files
+large-files.txt

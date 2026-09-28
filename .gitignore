@@ -14,6 +14,9 @@ src/models/*.weights.h5
 data/*.tar.gz
 data/raw/
 data/processed/crops/
+data/test1/
+data/test2/
+data/train/
 
 # trained weights (share via Drive; metrics/figures ARE committed)
 results/models/*.keras
@@ -27,4 +30,5 @@ venv/
 data/*.zip
 data/FileStructure.txt
 .tar.gz
+
 

@@ -15,3 +15,4 @@ venv/
 data/*.zip
 data/FileStructure.txt
 .tar.gz
+

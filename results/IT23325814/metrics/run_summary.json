@@ -1,0 +1,45 @@
+{
+  "model": {
+    "total_params": 24113284,
+    "trainable_params": 525572,
+    "frozen_params": 23587712
+  },
+  "member": "IT23325814",
+  "leakage": {
+    "clusters_spanning_multiple_splits": 0,
+    "duplicate_paths": 0,
+    "split_counts": {
+      "train": 3005,
+      "val": 645,
+      "test": 645
+    },
+    "passed": true
+  },
+  "feature_seconds": 151.6,
+  "train_seconds": 7.8,
+  "dataset": {
+    "total_images": 18437,
+    "labelled_images": 4295,
+    "split_counts": {
+      "train": 3005,
+      "val": 645,
+      "test": 645
+    },
+    "shared_manifest_agreement": 1.0
+  },
+  "test": {
+    "micro_f1_05": 0.6842420611144397,
+    "macro_f1_05": 0.528098587143149,
+    "micro_f1_tuned": 0.685,
+    "macro_f1_tuned": 0.6410745216470524,
+    "micro_auc": 0.8610800637886077,
+    "macro_auc": 0.8319936404599426,
+    "subset_accuracy_05": 0.4573643410852713,
+    "thresholds": {
+      "D00": 0.35000000000000003,
+      "D10": 0.1,
+      "D20": 0.35000000000000003,
+      "D40": 0.6000000000000001
+    }
+  }
+}

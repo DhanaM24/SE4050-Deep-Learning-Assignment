@@ -1,0 +1,41 @@
+{
+  "dataset": {
+    "total_images": 18437,
+    "per_split": {
+      "train": 13142,
+      "test2": 2664,
+      "test1": 2631
+    },
+    "corrupt": 1,
+    "exact_duplicate_groups": 0
+  },
+  "leakage": {
+    "clusters_spanning_multiple_splits": 0,
+    "duplicate_paths": 0,
+    "split_counts": {
+      "train": 3005,
+      "val": 645,
+      "test": 645
+    },
+    "passed": true
+  },
+  "model": {
+    "total_params": 14847044,
+    "trainable_params": 132356,
+    "frozen_params": 14714688
+  },
+  "feature_seconds": 261.9,
+  "train_seconds": 6.6,
+  "computational": {
+    "total_params": 14847044,
+    "trainable_params": 132356,
+    "frozen_params": 14714688,
+    "feature_extraction_seconds": 261.9,
+    "training_seconds": 6.6,
+    "epochs_run": 30,
+    "best_epoch": 18,
+    "checkpoint_mb": 60.55,
+    "backbone": "VGG16 ImageNet (frozen)",
+    "device": "CPU (TensorFlow 2.21, native Windows - no GPU support)"
+  }
+}

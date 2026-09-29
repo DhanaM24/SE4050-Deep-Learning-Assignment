@@ -1,0 +1,67 @@
+{
+  "train": {
+    "accuracy": 0.7970128988458928,
+    "precision_macro": 0.7314545647288309,
+    "recall_macro": 0.8139385765937518,
+    "f1_macro": 0.7540844441926164,
+    "precision_weighted": 0.8126003518954181,
+    "recall_weighted": 0.7970128988458928,
+    "f1_weighted": 0.8001040754964343,
+    "roc_auc_macro_ovr": 0.9555444128895725,
+    "n_samples": 5892
+  },
+  "val": {
+    "accuracy": 0.7727632620744259,
+    "precision_macro": 0.707157500137297,
+    "recall_macro": 0.7644394416271063,
+    "f1_macro": 0.7231224904679459,
+    "precision_weighted": 0.7870510182717378,
+    "recall_weighted": 0.7727632620744259,
+    "f1_weighted": 0.7750711702088323,
+    "roc_auc_macro_ovr": 0.9291437231258889,
+    "n_samples": 1263
+  },
+  "test": {
+    "accuracy": 0.7820186598812553,
+    "precision_macro": 0.7195280235394041,
+    "recall_macro": 0.7837287121086074,
+    "f1_macro": 0.7400696273590646,
+    "precision_weighted": 0.7936276039352462,
+    "recall_weighted": 0.7820186598812553,
+    "f1_weighted": 0.7848180961306903,
+    "roc_auc_macro_ovr": 0.9415938911276909,
+    "n_samples": 1179,
+    "confusion_matrix": [
+      [
+        248,
+        25,
+        47,
+        34
+      ],
+      [
+        4,
+        42,
+        5,
+        1
+      ],
+      [
+        31,
+        16,
+        253,
+        21
+      ],
+      [
+        31,
+        5,
+        37,
+        379
+      ]
+    ]
+  },
+  "efficiency": {
+    "total_params": 2422468,
+    "model_size_mb": 26.353481,
+    "latency_ms_per_image": 114.15462300006766,
+    "device": "CPU"
+  }
+}

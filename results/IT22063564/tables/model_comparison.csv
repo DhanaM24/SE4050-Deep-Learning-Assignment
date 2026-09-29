@@ -1,0 +1,2 @@
+model,test_accuracy,test_precision_macro,test_recall_macro,test_f1_macro,test_roc_auc_macro,train_accuracy,val_accuracy,generalization_gap,params_millions,model_size_mb,latency_ms,train_minutes,epochs_run,device
+mobilenetv2,0.7820186598812553,0.7195280235394041,0.7837287121086074,0.7400696273590646,0.9415938911276909,0.7970128988458928,0.7727632620744259,0.014994238964637474,2.422468,26.353481,114.15462300006766,45.1093909650003,26,CPU

@@ -1,0 +1,27 @@
+{
+  "split_md5": "5fac8fa95389101fde12da21ab93388b",
+  "config": {
+    "img_size": 224,
+    "batch_size": 64,
+    "epochs": 100,
+    "lr": 0.001,
+    "seed": 42,
+    "dropout": 0.5,
+    "patience_earlystop": 12,
+    "patience_lr": 5,
+    "class_names": [
+      "D00",
+      "D10",
+      "D20",
+      "D40"
+    ],
+    "checkpoint_path": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\results\\IT23331518\\custom_cnn_model.keras",
+    "shared_manifest": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\results\\IT22064868\\metrics\\split_manifest.csv"
+  },
+  "model": {
+    "total_params": 5107652,
+    "trainable_params": 5107652,
+    "frozen_params": 0,
+    "backbone": "Custom CNN (from scratch, multi-label head)"
+  }
+}

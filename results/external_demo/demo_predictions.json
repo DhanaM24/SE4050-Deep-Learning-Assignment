@@ -1,0 +1,86 @@
+{
+  "purpose": "External unseen-image demonstration - NOT part of the formal evaluation. No metric in results/<reg>/metrics/ is affected.",
+  "image_url": "https://images.squarespace-cdn.com/content/v1/573365789f726693272dc91a/1704992146415-CI272VYXPALWT52IGLUB/AdobeStock_201419293.jpeg?format=1500w",
+  "image_path": "results\\external_demo\\external_image.jpg",
+  "image_size": [
+    1500,
+    1004
+  ],
+  "external_to_rdd2020": "unverified - served from an AdobeStock image URL; cannot be programmatically confirmed absent from RDD2020",
+  "predictions": {
+    "vgg16": {
+      "preprocessing": "resize 224x224 -> vgg16.preprocess_input (RGB->BGR, ImageNet mean subtraction) -> frozen backbone + head",
+      "probabilities": {
+        "D00": 0.1877,
+        "D10": 0.0026,
+        "D20": 0.0182,
+        "D40": 0.9892
+      },
+      "tuned_thresholds": {
+        "D00": 0.4,
+        "D10": 0.05,
+        "D20": 0.4,
+        "D40": 0.5
+      },
+      "predicted_at_tuned_thresholds": [
+        "D40"
+      ],
+      "predicted_at_0_5": [
+        "D40"
+      ]
+    },
+    "resnet50": {
+      "preprocessing": "resize 224x224 -> resnet50.preprocess_input (ImageNet mean subtraction) -> frozen backbone + head",
+      "probabilities": {
+        "D00": 0.0479,
+        "D10": 0.0017,
+        "D20": 0.0077,
+        "D40": 0.9944
+      },
+      "tuned_thresholds": {
+        "D00": 0.35,
+        "D10": 0.1,
+        "D20": 0.35,
+        "D40": 0.6
+      },
+      "predicted_at_tuned_thresholds": [
+        "D40"
+      ],
+      "predicted_at_0_5": [
+        "D40"
+      ]
+    },
+    "mobilenetv2": {
+      "preprocessing": "resize 224x224, raw [0,255] pixels (Rescaling to [-1,1] inside the model); NOTE: model was trained on box crops, whole image used here",
+      "probabilities": {
+        "D00": 0.2387,
+        "D10": 0.1378,
+        "D20": 0.5041,
+        "D40": 0.1194
+      },
+      "top1": "D20",
+      "top1_confidence": 0.5041
+    },
+    "custom_cnn": {
+      "preprocessing": "resize 224x224, raw [0,255] pixels (Rescaling 1/255 inside the model)",
+      "probabilities": {
+        "D00": 0.2621,
+        "D10": 0.0222,
+        "D20": 0.5814,
+        "D40": 0.3476
+      },
+      "tuned_thresholds": {
+        "D00": 0.3,
+        "D10": 0.15,
+        "D20": 0.45,
+        "D40": 0.45
+      },
+      "predicted_at_tuned_thresholds": [
+        "D20"
+      ],
+      "predicted_at_0_5": [
+        "D20"
+      ]
+    }
+  }
+}

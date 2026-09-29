@@ -10,7 +10,7 @@ import yaml
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]  # src/IT22063564/utils.py -> repo root
 CONFIG_DIR = Path(__file__).resolve().parent / "configs"
-RESULTS_DIR = PROJECT_ROOT / "results"
+RESULTS_DIR = PROJECT_ROOT / "results" / "IT22063564"
 FIGURES_DIR = RESULTS_DIR / "figures"
 MODELS_DIR = RESULTS_DIR / "models"
 TABLES_DIR = RESULTS_DIR / "tables"

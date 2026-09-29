@@ -1,0 +1,10 @@
+{
+  "clusters_spanning_multiple_splits": 0,
+  "duplicate_paths": 0,
+  "split_counts": {
+    "train": 3005,
+    "val": 645,
+    "test": 645
+  },
+  "passed": true
+}

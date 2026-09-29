@@ -1,2 +1,5 @@
-model,test_accuracy,test_precision_macro,test_recall_macro,test_f1_macro,test_roc_auc_macro,train_accuracy,val_accuracy,generalization_gap,params_millions,model_size_mb,latency_ms,train_minutes,epochs_run,device
-mobilenetv2,0.8006785411365565,0.7438057781885543,0.7988549417784323,0.7632425998015497,0.9489419088512975,0.8304480651731161,0.7862232779097387,0.029769524036559636,2.422468,26.348075,160.12051091999865,8.313116011650001,30,GPU
+model,task,headline_metric,test_accuracy_or_subset,micro_f1,macro_f1,roc_auc_macro,train_accuracy,val_accuracy,generalization_gap,total_params,trainable_params,model_size_mb,latency_ms,train_minutes,epochs_run,device,seed,split_md5
+vgg16_multilabel,multi-label full image,micro_f1=0.6919,0.4806,0.6919,0.5556,0.8320,n/a,n/a,n/a,14847044,132356,60.5,not_measured,4.47,30,CPU,42,5fac8fa95389101fde12da21ab93388b
+resnet50_multilabel,multi-label full image,micro_f1=0.6842,0.4574,0.6842,0.5281,0.8320,n/a,n/a,n/a,24113284,525572,101.3,not_measured,2.66,26,CPU,42,5fac8fa95389101fde12da21ab93388b
+mobilenetv2_crops,multi-class damage crops,accuracy=0.7820,0.7820,n/a,0.7401,0.9416,0.7970,0.7728,0.0150,2422468,2004100,26.4,114.2,45.1,26,CPU,42,own source-image-grouped split
+custom_cnn_multilabel,multi-label full image (from scratch),micro_f1=0.5613,0.3612,0.5613,0.4353,0.7601,n/a,n/a,n/a,5107652,5107652,61.35,not_measured,26.3,21,CPU,42,5fac8fa95389101fde12da21ab93388b

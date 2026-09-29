@@ -1,0 +1,38 @@
+{
+  "split_md5": "5fac8fa95389101fde12da21ab93388b",
+  "leakage": {
+    "clusters_spanning_multiple_splits": 0,
+    "duplicate_paths": 0,
+    "split_counts": {
+      "train": 3005,
+      "val": 645,
+      "test": 645
+    },
+    "passed": true
+  },
+  "model": {
+    "total_params": 5107652,
+    "trainable_params": 5107652,
+    "frozen_params": 0,
+    "backbone": "Custom CNN (from scratch, multi-label head)"
+  },
+  "train_seconds": 1576.4,
+  "computational": {
+    "total_params": 5107652,
+    "trainable_params": 5107652,
+    "frozen_params": 0,
+    "backbone": "Custom CNN (from scratch)",
+    "feature_extraction_seconds": null,
+    "training_seconds": 1576.4,
+    "epochs_run": 21,
+    "best_epoch": 9,
+    "checkpoint_mb": 61.35,
+    "device": "CPU (TensorFlow 2.21, native Windows - no GPU support)"
+  },
+  "dataset": {
+    "labelled_images": 4295,
+    "train": 3005,
+    "val": 645,
+    "test": 645
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "total_images": 18437,
+  "per_split": {
+    "train": 13142,
+    "test2": 2664,
+    "test1": 2631
+  },
+  "per_split_source": {
+    "Czech": {
+      "test1": 349,
+      "test2": 360,
+      "train": 2829
+    },
+    "India": {
+      "test1": 969,
+      "test2": 990,
+      "train": 7706
+    },
+    "Japan": {
+      "test1": 1313,
+      "test2": 1314,
+      "train": 2607
+    }
+  },
+  "image_sizes": {
+    "540.0x540.0": 48,
+    "600.0x600.0": 8607,
+    "720.0x720.0": 9665,
+    "1024.0x1024.0": 88,
+    "1080.0x1080.0": 28
+  },
+  "corrupt_images": [
+    {
+      "path": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\data\\train\\Japan\\images\\Japan_004643.jpg",
+      "error": "OSError: image file is truncated (16 bytes not processed)"
+    }
+  ],
+  "exact_duplicate_groups": [],
+  "labels": {
+    "annotated_images": 10535,
+    "images_with_no_object": 5678,
+    "images_with_main4_label": 4295,
+    "images_without_main4_label": 6240,
+    "per_class_image_counts": {
+      "D00": 1873,
+      "D10": 360,
+      "D20": 1887,
+      "D40": 1684
+    },
+    "multi_label_images": 1300,
+    "single_label_images": 2995,
+    "per_source": {
+      "India": 7706,
+      "Czech": 2829
+    },
+    "per_source_class_counts": {
+      "Czech": {
+        "D00": 764,
+        "D10": 300,
+        "D20": 129,
+        "D40": 154
+      },
+      "India": {
+        "D00": 1109,
+        "D10": 60,
+        "D20": 1758,
+        "D40": 1530
+      }
+    }
+  },
+  "notes": [
+    "Damage labels cover train/Czech and train/India (VOC xml). 4295 of the 10535 annotated images carry at least one of the four target classes; the rest carry only non-target RDD tags and are excluded from damage training. Japan train images and test1/test2 ship without damage annotations.",
+    "Japan images and test1/test2 are used only for dataset description, not for damage evaluation."
+  ]
+}

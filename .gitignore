@@ -1,0 +1,42 @@
+# local environment
+/venv/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# assignment inputs (not ours to commit)
+Marking Guide.pdf
+*Sample Report*.pdf
+
+# trained weights and caches (share via Drive; metrics/figures ARE committed)
+results/*/models/*.keras
+results/*/models/*.h5
+results/*/models/*.npz
+results/*/models/*.weights.h5
+results/*/*.keras
+results/*/*.h5
+results/*/*.weights.h5
+results/*/cache/
+src/*/models/*.keras
+src/*/models/*.weights.h5
+src/*/*.keras
+src/*/*.weights.h5
+
+# dataset archives and derived data (too large for git - see README for download)
+data/*.tar.gz
+data/*.zip
+data/raw/
+data/processed/
+data/test1/
+data/test2/
+data/train/
+data/cnn_train/
+data/_unzipped/
+data/FileStructure.txt
+*.tar.gz
+
+*.keras
+*.h5
+*.pth
+*.pt

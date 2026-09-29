@@ -4,7 +4,7 @@
 seed: 42
 
 data:
-  raw_dir: data/raw/train            # extracted from data/train.tar.gz (RDD2020)
+  raw_dir: data/train              # RDD2020 train split (Czech/India/Japan)
   processed_dir: data/processed      # crops + splits.csv are written here
   countries: [Czech, India, Japan]   # countries missing on disk are skipped with a warning
   classes: [D00, D10, D20, D40]      # official RDD2020 label map; other tags (D01, D44, ...) are dropped

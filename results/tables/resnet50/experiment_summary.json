@@ -1,0 +1,22 @@
+{
+    "model_name": "ResNet50",
+    "pretrained": true,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "batch_size": 32,
+    "epochs_requested": 5,
+    "epochs_trained": 5,
+    "seed": 42,
+    "best_val_accuracy": 0.8416666666666667,
+    "best_val_loss": 0.4171075294415156,
+    "total_parameters": 23516228,
+    "trainable_parameters": 23516228,
+    "training_duration_sec": 1490.0415110588074,
+    "class_mapping": {
+        "D00": 0,
+        "D10": 1,
+        "D20": 2,
+        "D40": 3
+    }
+}

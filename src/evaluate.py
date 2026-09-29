@@ -78,9 +78,11 @@ def generate_classification_metrics(
     Returns:
         pd.DataFrame: DataFrame containing per-class metrics and summary averages.
     """
+    labels = list(range(len(class_names)))
     report_dict = classification_report(
         y_true,
         y_pred,
+        labels=labels,
         target_names=class_names,
         output_dict=True,
         zero_division=0
@@ -109,7 +111,8 @@ def plot_and_save_confusion_matrix(
     Returns:
         plt.Figure: Matplotlib figure.
     """
-    cm = confusion_matrix(y_true, y_pred)
+    labels = list(range(len(class_names)))
+    cm = confusion_matrix(y_true, y_pred, labels=labels)
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(
         cm,

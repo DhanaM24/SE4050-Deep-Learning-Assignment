@@ -1,18 +1,23 @@
-# dataset archives and derived data (too large for git - see README for download)
+# Dataset archives and derived data
 data/*.tar.gz
+data/*.zip
 data/raw/
 data/processed/crops/
+data/classification/
+data/RDD2020/
+data/FileStructure.txt
 
-# trained weights (share via Drive; metrics/figures ARE committed)
+# Trained weights & checkpoints
 results/models/*.keras
 results/models/*.h5
+*.pth
+*.pt
 
+# Python & Environment
 __pycache__/
+*.py[cod]
+*$py.class
 *.pyc
 .ipynb_checkpoints/
 .venv/
 venv/
-data/*.zip
-data/FileStructure.txt
-.tar.gz
-

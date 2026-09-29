@@ -1,0 +1,70 @@
+{
+  "model": "mobilenetv2",
+  "total_params": 2422468,
+  "trainable_params_phase1": 164484,
+  "trainable_params_phase2": 2004100,
+  "epochs_run": 26,
+  "best_epoch": 21,
+  "best_val_loss": 0.6112286448478699,
+  "best_val_accuracy": 0.7727632522583008,
+  "train_accuracy_at_best": 0.7834351658821106,
+  "total_train_seconds": 2706.563457900018,
+  "mean_epoch_seconds": 104.08766036154478,
+  "gpu": [],
+  "tensorflow_version": "2.21.0",
+  "config": {
+    "seed": 42,
+    "data": {
+      "raw_dir": "data/train",
+      "processed_dir": "data/processed",
+      "countries": [
+        "Czech",
+        "India",
+        "Japan"
+      ],
+      "classes": [
+        "D00",
+        "D10",
+        "D20",
+        "D40"
+      ],
+      "crop_context": 0.15,
+      "min_box_side": 20,
+      "crop_size": 224,
+      "split": {
+        "train": 0.7,
+        "val": 0.15,
+        "test": 0.15
+      }
+    },
+    "train": {
+      "img_size": 224,
+      "batch_size": 32,
+      "use_class_weights": true,
+      "early_stopping_patience": 5
+    },
+    "model": "mobilenetv2",
+    "architecture": {
+      "weights": "imagenet",
+      "alpha": 1.0,
+      "dropout": 0.3,
+      "dense_units": 128,
+      "l2": 0.0001
+    },
+    "augmentation": {
+      "horizontal_flip": true,
+      "rotation": 0.05,
+      "zoom": 0.1,
+      "contrast": 0.1
+    },
+    "phase1": {
+      "epochs": 10,
+      "learning_rate": 0.001
+    },
+    "phase2": {
+      "epochs": 20,
+      "learning_rate": 1e-05,
+      "unfreeze_from_layer": 100
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "n_images": 4295,
+  "n_clusters": 4095,
+  "n_clusters_with_duplicates": 82,
+  "largest_cluster": 53,
+  "split_counts": {
+    "train": 3005,
+    "val": 645,
+    "test": 645
+  },
+  "per_class_split": {
+    "D00": {
+      "test": 275,
+      "train": 1312,
+      "val": 286
+    },
+    "D10": {
+      "test": 51,
+      "train": 259,
+      "val": 50
+    },
+    "D20": {
+      "test": 290,
+      "train": 1320,
+      "val": 277
+    },
+    "D40": {
+      "test": 265,
+      "train": 1165,
+      "val": 254
+    }
+  },
+  "per_source_split": {
+    "Czech": {
+      "test": 137,
+      "train": 772,
+      "val": 163
+    },
+    "India": {
+      "test": 508,
+      "train": 2233,
+      "val": 482
+    }
+  }
+}

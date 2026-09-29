@@ -1,210 +1,143 @@
-# SE4050 Deep Learning 2026 — Multi-Label Road-Damage Classification (VGG16)
+# SE4050 Deep Learning 2026 — Road-Damage Classification (Group Project)
 
-Multi-label classifier for the four road-damage classes in `label_map.pbtxt`
-(**D00** longitudinal crack, **D10** transverse crack, **D20** alligator crack,
-**D40** pothole) built as part of the group project. The whole
-pipeline - validation, leakage-safe split, VGG16 training, evaluation and
-inference - lives in one self-contained notebook,
-`notebooks/VGG_16.ipynb`; the shared split manifest
-(`results/metrics/split_manifest.csv`) is used by every group model.
+Road-damage type classification on the **RDD2020** dataset, comparing four CNNs
+under identical data, splits and training conditions:
 
-Headline result (frozen ImageNet VGG16 + trained head, single seed 42):
+| Model | Task | Owner | Notebook |
+|---|---|---|---|
+| Custom CNN | country-level image classification (demo baseline) | IT23331518 | [notebooks/IT23331518/custom_cnn.ipynb](notebooks/IT23331518/custom_cnn.ipynb) |
+| VGG16 | multi-label damage classification (full images) | IT22064868 | [notebooks/IT22064868/VGG_16.ipynb](notebooks/IT22064868/VGG_16.ipynb) |
+| ResNet50 | multi-label damage classification (full images) | IT23325814 | [notebooks/IT23325814/ResNet50.ipynb](notebooks/IT23325814/ResNet50.ipynb) |
+| MobileNetV2 | multi-class damage classification (bounding-box crops) | IT22063564 | [notebooks/IT22063564/mobilenetv2_training.ipynb](notebooks/IT22063564/mobilenetv2_training.ipynb) |
 
-| metric (test, 645 images) | @0.5 | validation-tuned thresholds |
-|---|---|---|
-| micro F1   | 0.692 | 0.696 |
-| macro F1   | 0.556 | **0.649** |
-| micro / macro ROC-AUC | 0.864 / 0.832 | — |
-| subset accuracy | 0.481 | 0.389 |
+Classes (official RDD2020 label map): **D00** longitudinal crack, **D10**
+transverse crack, **D20** alligator crack, **D40** pothole. Other tags found in
+the XMLs (`D01`, `D44`, …) are dropped.
 
-Full numbers, figures and error analysis are produced by running the notebook;
-metrics and figures go to `results/`, saved models to `src/models/`.
+## Dataset
+
+- **RDD2020: Road Damage Dataset 2020** — Arya, D. et al., *Data in Brief* 36
+  (2021) 107133, doi:10.1016/j.dib.2021.107133. Licence: CC BY 4.0.
+  Download: https://data.mendeley.com/datasets/5ty2wb6gvg/1 (or
+  https://github.com/sekilab/RoadDamageDetector)
+- Road photos from Czech Republic, India and Japan with Pascal-VOC bounding
+  boxes.
+
+The dataset is **not** committed (see `.gitignore`). Place the extracted
+archive so that this exists (structure described in `data/FileStructure.txt`):
+
+```
+data/
+  train/Czech/{images,annotations/xmls}/   # 2,829 images, all annotated
+  train/India/{images,annotations/xmls}/   # 7,706 images, all annotated
+  train/Japan/images/                      # 2,607 images, no annotations here
+  train/label_map.pbtxt                    # D00/D10/D20/D40 class map
+  test1/  test2/                           # images only, no damage annotations
+```
+
+Validation facts (recorded by every notebook into `results/<reg>/metrics/`):
+
+* 13,142 train images; 1 corrupt file (`Japan_004643.jpg`) is detected and
+  skipped, leaving 13,141 usable images.
+* 10,535 annotated train images (Czech + India); **4,295** carry at least one
+  of the four target classes — these form the labelled multi-label set
+  (1,300 of them have more than one damage type).
+* `test1`/`test2` and the Japan train images ship without damage annotations
+  and are description-only; all reported metrics use the held-out **test**
+  split of the labelled set (or of the crops carved from it).
+
+**Task framing.** VGG16 and ResNet50 classify the full image (multi-label,
+sigmoid + BCE). MobileNetV2 classifies square crops around each bounding box
+(15% context, 224×224, multi-class softmax); its labelled test set is carved
+out of `train` **by source image** so crops from one photo never cross splits.
+The custom CNN trains a small from-scratch CNN on the three country folders as
+a baseline demo.
 
 ## Repository layout
 
 ```
-dataset/                  # extracted dataset (git-ignored, see below)
-notebooks/VGG_16.ipynb    # the whole pipeline: validation -> split -> model -> evaluation -> inference
-src/models/               # trained model + head weights + run metadata (git-ignored)
-results/cache/            # precomputed VGG16 feature caches (git-ignored)
-results/                  # metrics json, figures, predictions, error analysis
-.env.example              # environment template (copy to .env)
-requirements.txt          # pinned dependencies
+notebooks/<reg>/            # one self-contained notebook per member
+src/<reg>/                  # member scripts/models (VGG/ResNet keep everything in the notebook)
+  IT22063564/               # MobileNetV2 pipeline (prepare_data/train/evaluate + configs)
+  IT22064868/models/        # VGG16 checkpoints + run metadata (weights git-ignored)
+  IT23325814/               # ResNet50 checkpoints (weights git-ignored) + helpers
+  IT23331518/               # custom CNN helpers
+results/<reg>/              # per-member metrics, figures, tables, caches
+  IT22064868/cache/         # precomputed VGG16 features (git-ignored)
+  tables/model_comparison.csv
+data/                       # dataset (git-ignored, see above)
+.env.example                # environment template (copy to .env)
+requirements.txt            # dependencies
 ```
 
 ## Requirements
 
-* Python **3.11** (tested on Windows 11; TensorFlow 2.21 has **no GPU support on
-  native Windows**, so everything runs on CPU — the pipeline is designed for it:
-  frozen backbone + precomputed features).
-* ~1.5 GB free disk (dataset images + feature caches).
+* Python **3.11** (tested on Windows 11). TensorFlow ≥ 2.11 has **no GPU
+  support on native Windows**, so all notebooks run on CPU — the pipelines are
+  designed for it (frozen backbones, precomputed features, early stopping).
+* ~4 GB free disk (dataset + crops + feature caches + venv).
 
 ## Setup
 
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-Copy-Item .env.example .env        # adjust paths only if needed
+pip install -r requirements.txt        # torch/torchvision are optional (PyTorch helpers)
+Copy-Item .env.example .env            # VGG16 paths/hyper-parameters
+python -m ipykernel install --user --name se4050-venv   # kernel used below
 ```
 
-## Dataset access
+## Execution
 
-The dataset is **not** committed (see `.gitignore`). Place the extracted
-images so that the following exists (structure described in the original
-`FileStructure.txt` shipped with the dataset):
-
-```
-dataset/
-  train/Czech/{images,labels}/     # XML labels
-  train/India/{images,labels}/     # XML labels
-  test1/ test2/                    # images only, no damage annotations
-  train/label_map.pbtxt            # D00/D10/D20/D40 class map
-```
-
-Notes recorded during validation (`results/metrics/dataset_stats.json`):
-
-* 15,830 extracted images, all intact (0 corrupt, 0 exact duplicates). This is
-  the original 18,437 minus the unused `train/Japan` extraction (2,607 images),
-  which was removed locally: validation had reported its one corrupt file
-  (`Japan_004643.jpg`) and the images cannot be supervised (see below).
-* `train.tar.gz` is truncated upstream — the Japanese labels were never
-  recovered, so supervised training uses **Czech + India only** (4,295 labeled
-  images).
-* `test1`/`test2` ship no damage annotations and are therefore description-only;
-  all reported metrics use the held-out **test** split of the labeled set.
-
-## Execution (in order)
+Each notebook is self-contained (config, validation and split code live inside
+it) and is executed with the project-root walk, so run from the repository
+root:
 
 ```powershell
-# 1. register the kernel once
-python -m ipykernel install --user --name se4050-venv
-
-# 2. run the notebook end-to-end (~10 min):
-#    validates the dataset, builds the split, extracts features, trains,
-#    evaluates, tunes thresholds, plots figures, classifies a sample image
-python -m nbconvert --to notebook --execute --inplace notebooks\VGG_16.ipynb `
-    --ExecutePreprocessor.kernel_name=se4050-venv --ExecutePreprocessor.timeout=2400
+python -m nbconvert --to notebook --execute --inplace notebooks\IT22064868\VGG_16.ipynb `
+    --ExecutePreprocessor.kernel_name=se4050-venv --ExecutePreprocessor.timeout=7200
+python -m nbconvert --to notebook --execute --inplace notebooks\IT23325814\ResNet50.ipynb `
+    --ExecutePreprocessor.kernel_name=se4050-venv --ExecutePreprocessor.timeout=7200
+python -m nbconvert --to notebook --execute --inplace notebooks\IT23331518\custom_cnn.ipynb `
+    --ExecutePreprocessor.kernel_name=se4050-venv --ExecutePreprocessor.timeout=7200
+python -m nbconvert --to notebook --execute --inplace notebooks\IT22063564\mobilenetv2_training.ipynb `
+    --ExecutePreprocessor.kernel_name=se4050-venv --ExecutePreprocessor.timeout=21600
 ```
 
-The notebook is self-contained (config, validation and split code are all
-inside it): it re-validates, re-splits (`force=True`), extracts VGG16 features
-with caching, trains the head, evaluates on the untouched test set, tunes
-thresholds **on validation only**, performs the error analysis, and writes
-metrics/figures to `results/` and the saved model to `src/models/`.
+Order does not matter; the MobileNetV2 run is the longest (crops are built on
+the first run, then two training phases).
 
-## Reproducibility
+## Shared methodology
 
-* Single global seed `42` (Python / NumPy / TensorFlow), set in the notebook
-  setup section from `.env`.
-* Split manifest: `results/metrics/split_manifest.csv` — shared source of
-  truth for all group models; leakage report: `split_report.json`
-  (0 clusters spanning splits, 0 duplicate paths).
-* Test set is used **only** in the final evaluation cells; threshold tuning
-  uses validation only (assignment requirement).
+* Single global seed **42** (Python / NumPy / TensorFlow).
+* VGG16 and ResNet50 use the **same labelled set and the same split
+  algorithm** (64-bit dHash near-duplicate clusters assigned as whole units,
+  70/15/15). ResNet50 re-computes the split and cross-checks it against the
+  shared manifest `results/IT22064868/metrics/split_manifest.csv`
+  (agreement is saved to `results/IT23325814/metrics/shared_manifest_check.json`).
+* Threshold tuning happens on **validation only**; the test set is touched
+  once, in the final evaluation cells (assignment rule).
 * TensorFlow oneDNN CPU kernels may cause tiny numeric variation between runs;
   bit-level reproducibility is not claimed.
 
-## Key outputs
+## Key outputs (per member)
 
-| artifact | contents |
+| Artifact | Contents |
 |---|---|
-| `results/metrics/test_metrics.json` | test metrics @0.5 (per-class P/R/F1/AUC) |
-| `results/metrics/test_metrics_tuned.json` | same at validation-tuned thresholds |
-| `results/metrics/thresholds.json` | tuned per-class thresholds |
-| `results/metrics/run_summary.json` | config, timings, parameter counts |
-| `results/figures/` | EDA, learning curves, ROC, confusion matrices |
-| `results/error_analysis/` | FN/FP counts per class, confident-error grid |
-| `src/models/vgg16_multilabel.keras` | full saved model (backbone + trained head) |
-| `src/models/vgg16_head.weights.h5` | best head weights (validation AUC) |
-# SE4050-Deep-Learning-Assignment
-# SE4050-Deep-Learning-Assignment
+| `results/<reg>/metrics/test_metrics.json` | test metrics @0.5 (per-class P/R/F1/AUC) |
+| `results/<reg>/metrics/test_metrics_tuned.json` | same at validation-tuned thresholds |
+| `results/<reg>/metrics/thresholds.json` | tuned per-class thresholds |
+| `results/<reg>/metrics/run_summary.json` | config, timings, parameter counts |
+| `results/<reg>/figures/` | EDA, learning curves, ROC, confusion matrices |
+| `results/<reg>/tables/` | per-class tables, histories, classification reports |
+| `src/<reg>/models/*.keras` | saved models (git-ignored; share via Drive) |
 
-Road-damage type classification on the **RDD2020** dataset, comparing four CNNs
-under identical data splits and training conditions: a custom CNN, VGG16, ResNet50 and MobileNetV2.
+MobileNetV2 additionally writes `tables/model_comparison.csv` (one row per
+model — the shared comparison table) and `data/processed/splits.csv`
+(per-crop split assignment, leakage guard asserted in `prepare_data.py`).
 
-## Dataset
+## Citation
 
-- **RDD2020: Road Damage Dataset 2020** - Arya, D. et al., *Data in Brief* 36 (2021) 107133,
-  doi:10.1016/j.dib.2021.107133. Licence: CC BY 4.0.
-  Download: https://data.mendeley.com/datasets/5ty2wb6gvg/1 (or https://github.com/sekilab/RoadDamageDetector)
-- Road photos from Czech Republic, India and Japan with Pascal-VOC bounding boxes.
-- Classes used: `D00` longitudinal crack, `D10` transverse crack, `D20` alligator crack, `D40` pothole
-  (the official label map). Other tags found in the XMLs (`D01`, `D11`, `D43`, `D44`, `D50`, ...) are dropped.
-
-**Task framing.** Every bounding box is cropped (square window with 15% context) and classified into one of
-the four damage types. The published `test1`/`test2` archives have **no annotations**, so our labelled
-test set is carved out of `train.tar.gz`: 70/15/15 train/val/test, split **by source image** so crops from
-the same photo never appear in two splits (checked by an assertion in `prepare_data.py`).
-
-## Setup
-
-```bash
-pip install -r requirements.txt
-```
-
-Place `train.tar.gz` in `data/` and extract it:
-
-```bash
-mkdir -p data/raw && tar -xzf data/train.tar.gz -C data/raw     # -> data/raw/train/{Czech,India,Japan}
-python src/IT22063564/prepare_data.py                             # -> data/processed/crops/{train,val,test}/<class>/
-```
-
-All shared settings (seed = 42, image size, batch size, split ratios, classes) live in
-[src/IT22063564/configs/common.yaml](src/IT22063564/configs/common.yaml). Change them only as a group - every model must then be retrained.
-
-## Train and evaluate a model
-
-```bash
-python src/IT22063564/train.py      # --config defaults to src/IT22063564/configs/mobilenetv2.yaml
-python src/IT22063564/evaluate.py
-```
-
-`train.py` uses only train + validation data; `evaluate.py` is the only script that reads the test split.
-Results are written to `results/`:
-
-| File | Content |
-|---|---|
-| `tables/<model>_history.csv`, `figures/<model>_learning_curves.png` | per-epoch loss/accuracy |
-| `tables/<model>_metrics.json` | accuracy, macro/weighted P/R/F1, ROC-AUC for train/val/test, latency, size |
-| `tables/<model>_classification_report.csv` | per-class test metrics |
-| `figures/<model>_confusion_matrix.png`, `_roc_curves.png`, `_misclassified.png` | test visualisations |
-| `tables/model_comparison.csv` | one row per model - the shared comparison table |
-
-### Running on Google Colab (GPU)
-
-```python
-!git clone <repo-url> && cd SE4050-Deep-Learning-Assignment
-# upload/copy data/processed/crops (zip it locally after prepare_data.py) or train.tar.gz from Drive
-!pip install -q -r requirements.txt
-!python src/IT22063564/train.py && python src/IT22063564/evaluate.py
-```
-
-## Adding a model (for each member)
-
-1. Create `src/IT22063564/models/<name>.py` with `build_model(cfg)` (and `unfreeze_top(model, from_layer)` if it
-   uses two-phase fine-tuning). The model must take raw 0-255 pixels and do its own preprocessing inside
-   the network - see [src/IT22063564/models/mobilenetv2.py](src/IT22063564/models/mobilenetv2.py).
-2. Register it in [src/IT22063564/models/\_\_init\_\_.py](src/IT22063564/models/__init__.py).
-3. Add `src/IT22063564/configs/<name>.yaml` (copy `mobilenetv2.yaml`).
-
-## Models
-
-| Model | Owner | Config |
-|---|---|---|
-| Custom CNN | | |
-| VGG16 | | |
-| ResNet50 | | |
-| MobileNetV2 | IT22063564 | [src/IT22063564](src/IT22063564), notebook [notebooks/IT22063564/mobilenetv2_training.ipynb](notebooks/IT22063564/mobilenetv2_training.ipynb) |
-
-### MobileNetV2
-
-ImageNet-pretrained MobileNetV2 backbone (~2.3M params, inverted residuals + depthwise-separable
-convolutions) with a GAP -> Dropout(0.3) -> Dense(128, ReLU, L2) -> Dropout(0.3) -> Dense(4, softmax) head.
-Trained in two phases with Adam and class-weighted categorical cross-entropy:
-1. backbone frozen, head only - lr 1e-3, up to 10 epochs;
-2. backbone layers 100+ unfrozen (BatchNorm kept frozen) - lr 1e-5, up to 20 epochs.
-
-Early stopping (patience 5) and ReduceLROnPlateau on validation loss; the checkpoint with the lowest
-validation loss is kept. Augmentation: horizontal flip, rotation up to +-18 deg, zoom 10%, contrast 10%
-(no 90 deg rotations - they would turn a longitudinal crack into a transverse one).
+Arya, D. et al. (2021). RDD2020: A multi-labeled image dataset for
+general-purpose road damage detection. *Data in Brief*, 36, 107133.
+https://doi.org/10.1016/j.dib.2021.107133

@@ -1,0 +1,22 @@
+{
+  "D00": {
+    "missed (FN)": 50,
+    "spurious (FP)": 176,
+    "support": 275
+  },
+  "D10": {
+    "missed (FN)": 12,
+    "spurious (FP)": 92,
+    "support": 51
+  },
+  "D20": {
+    "missed (FN)": 41,
+    "spurious (FP)": 126,
+    "support": 290
+  },
+  "D40": {
+    "missed (FN)": 93,
+    "spurious (FP)": 40,
+    "support": 265
+  }
+}

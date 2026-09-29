@@ -1,0 +1,29 @@
+{
+    "model": "ResNet50",
+    "checkpoint": "results\\models\\resnet50\\best_model.pth",
+    "split": "test",
+    "seed": 42,
+    "num_test_samples": 3669,
+    "class_names": [
+        "D00",
+        "D10",
+        "D20",
+        "D40"
+    ],
+    "per_class_sample_counts": {
+        "D00": 946,
+        "D10": 697,
+        "D20": 1238,
+        "D40": 788
+    },
+    "test_loss": 0.45447031318182907,
+    "test_accuracy": 0.8312891796129735,
+    "macro_precision": 0.8401654329010854,
+    "macro_recall": 0.832809740276196,
+    "macro_f1": 0.8361701731513709,
+    "weighted_precision": 0.8331141030401147,
+    "weighted_recall": 0.8312891796129735,
+    "weighted_f1": 0.8319353338246085,
+    "evaluation_device": "cpu",
+    "evaluation_timestamp": "2026-09-29T09:13:05.877502"
+}

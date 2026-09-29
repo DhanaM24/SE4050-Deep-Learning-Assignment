@@ -15,9 +15,14 @@ results/*/models/*.keras
 results/*/models/*.h5
 results/*/models/*.npz
 results/*/models/*.weights.h5
+results/*/*.keras
+results/*/*.h5
+results/*/*.weights.h5
 results/*/cache/
 src/*/models/*.keras
 src/*/models/*.weights.h5
+src/*/*.keras
+src/*/*.weights.h5
 
 # dataset archives and derived data (too large for git - see README for download)
 data/*.tar.gz

@@ -5,7 +5,7 @@ under identical data, splits and training conditions:
 
 | Model | Task | Owner | Notebook |
 |---|---|---|---|
-| Custom CNN | country-level image classification (demo baseline) | IT23331518 | [notebooks/IT23331518/custom_cnn.ipynb](notebooks/IT23331518/custom_cnn.ipynb) |
+| Custom CNN | multi-label damage classification (full images, from scratch) | IT23331518 | [notebooks/IT23331518/custom_cnn.ipynb](notebooks/IT23331518/custom_cnn.ipynb) |
 | VGG16 | multi-label damage classification (full images) | IT22064868 | [notebooks/IT22064868/VGG_16.ipynb](notebooks/IT22064868/VGG_16.ipynb) |
 | ResNet50 | multi-label damage classification (full images) | IT23325814 | [notebooks/IT23325814/ResNet50.ipynb](notebooks/IT23325814/ResNet50.ipynb) |
 | MobileNetV2 | multi-class damage classification (bounding-box crops) | IT22063564 | [notebooks/IT22063564/mobilenetv2_training.ipynb](notebooks/IT22063564/mobilenetv2_training.ipynb) |
@@ -46,12 +46,12 @@ Validation facts (recorded by every notebook into `results/<reg>/metrics/`):
   and are description-only; all reported metrics use the held-out **test**
   split of the labelled set (or of the crops carved from it).
 
-**Task framing.** VGG16 and ResNet50 classify the full image (multi-label,
-sigmoid + BCE). MobileNetV2 classifies square crops around each bounding box
+**Task framing.** VGG16, ResNet50 and the custom CNN classify the full image
+(multi-label, sigmoid + BCE) on the same shared split manifest — the backbones
+use frozen ImageNet features, the custom CNN learns everything from scratch.
+MobileNetV2 classifies square crops around each bounding box
 (15% context, 224×224, multi-class softmax); its labelled test set is carved
 out of `train` **by source image** so crops from one photo never cross splits.
-The custom CNN trains a small from-scratch CNN on the three country folders as
-a baseline demo.
 
 ## Repository layout
 
@@ -110,11 +110,13 @@ the first run, then two training phases).
 ## Shared methodology
 
 * Single global seed **42** (Python / NumPy / TensorFlow).
-* VGG16 and ResNet50 use the **same labelled set and the same split
-  algorithm** (64-bit dHash near-duplicate clusters assigned as whole units,
+* VGG16, ResNet50 and the custom CNN use the **same labelled set and the same
+  split algorithm** (64-bit dHash near-duplicate clusters assigned as whole units,
   70/15/15). ResNet50 re-computes the split and cross-checks it against the
   shared manifest `results/IT22064868/metrics/split_manifest.csv`
-  (agreement is saved to `results/IT23325814/metrics/shared_manifest_check.json`).
+  (agreement is saved to `results/IT23325814/metrics/shared_manifest_check.json`);
+  the custom CNN aborts unless it re-derives the same manifest MD5
+  (`5fac8fa95389101fde12da21ab93388b`).
 * Threshold tuning happens on **validation only**; the test set is touched
   once, in the final evaluation cells (assignment rule).
 * TensorFlow oneDNN CPU kernels may cause tiny numeric variation between runs;

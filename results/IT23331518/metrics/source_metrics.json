@@ -1,0 +1,30 @@
+[
+  {
+    "source": "Czech",
+    "threshold": "0.5",
+    "n": 137,
+    "micro_f1": 0.6378737541528239,
+    "subset_acc": 0.48175182481751827
+  },
+  {
+    "source": "Czech",
+    "threshold": "tuned",
+    "n": 137,
+    "micro_f1": 0.6553398058252428,
+    "subset_acc": 0.23357664233576642
+  },
+  {
+    "source": "India",
+    "threshold": "0.5",
+    "n": 508,
+    "micro_f1": 0.5429936305732485,
+    "subset_acc": 0.328740157480315
+  },
+  {
+    "source": "India",
+    "threshold": "tuned",
+    "n": 508,
+    "micro_f1": 0.6388725778038755,
+    "subset_acc": 0.21850393700787402
+  }
+]

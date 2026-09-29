@@ -35,3 +35,8 @@ data/cnn_train/
 data/_unzipped/
 data/FileStructure.txt
 *.tar.gz
+
+*.keras
+*.h5
+*.pth
+*.pt

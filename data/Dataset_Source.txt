@@ -1,0 +1,39 @@
+Dataset Link : https://data.mendeley.com/datasets/5ty2wb6gvg/1
+
+Dataset      : RDD2020 (Road Damage Dataset 2020) - Arya, D. et al., Data in
+               Brief 36 (2021) 107133, doi:10.1016/j.dib.2021.107133, CC BY 4.0
+
+===============================================================================
+REQUIRED data/ FOLDER STRUCTURE  (read this first on a fresh clone / new PC)
+===============================================================================
+The data/ folder is git-ignored, so a fresh clone only contains this file.
+Download the archives from the link above and extract them so that data/ looks
+exactly like this (paths relative to the repository root):
+
+data/
+|- Dataset_Source.txt            this file
+|- train/                        <- RDD2020 "train" archive, extracted
+|  |- label_map.pbtxt            official D00/D10/D20/D40 class map
+|  |                             (ships with the archive; notebooks do not
+|  |                              read it - the class list is hard-coded)
+|  |- Czech/
+|  |  |- images/                 *.jpg  (2,829 images, all annotated)
+|  |  `- annotations/xmls/       *.xml  Pascal-VOC damage boxes
+|  |- India/
+|  |  |- images/                 *.jpg  (7,706 images, all annotated)
+|  |  `- annotations/xmls/       *.xml  Pascal-VOC damage boxes
+|  `- Japan/
+|     |- images/                 *.jpg  (2,607 images)
+|     `- annotations/xmls/       MAY BE MISSING/EMPTY - this is normal,
+|                                the notebooks skip Japan with a warning
+|- test1/                        <- RDD2020 "test1" archive, extracted
+|  |- Czech/  {images/ , annotations/}   images only - NO damage *.xml
+|  |- India/  {images/ , annotations/}   images only - NO damage *.xml
+|  `- Japan/  {images/ , annotations/}   images only - NO damage *.xml
+|- test2/                        same layout as test1/
+`- processed/                    GENERATED, never downloaded (see section 3)
+   |- crops/train/{D00,D10,D20,D40}/   *.jpg  224x224 square crops
+   |- crops/val/  {D00,D10,D20,D40}/   *.jpg
+   |- crops/test/ {D00,D10,D20,D40}/   *.jpg
+   |- splits.csv                 one row per crop
+   `- dataset_summary.json       crop counts used in the report

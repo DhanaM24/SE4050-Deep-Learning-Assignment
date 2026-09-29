@@ -3,28 +3,28 @@
     "source": "Czech",
     "threshold": "0.5",
     "n": 137,
-    "micro_f1": 0.6378737541528239,
-    "subset_acc": 0.48175182481751827
+    "micro_f1": 0.6385542168674698,
+    "subset_acc": 0.41605839416058393
   },
   {
     "source": "Czech",
     "threshold": "tuned",
     "n": 137,
-    "micro_f1": 0.6553398058252428,
-    "subset_acc": 0.23357664233576642
+    "micro_f1": 0.641860465116279,
+    "subset_acc": 0.22627737226277372
   },
   {
     "source": "India",
     "threshold": "0.5",
     "n": 508,
-    "micro_f1": 0.5429936305732485,
-    "subset_acc": 0.328740157480315
+    "micro_f1": 0.5716451857467779,
+    "subset_acc": 0.3405511811023622
   },
   {
     "source": "India",
     "threshold": "tuned",
     "n": 508,
-    "micro_f1": 0.6388725778038755,
-    "subset_acc": 0.21850393700787402
+    "micro_f1": 0.6495452113429642,
+    "subset_acc": 0.1830708661417323
   }
 ]

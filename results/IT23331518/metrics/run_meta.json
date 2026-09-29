@@ -15,8 +15,8 @@
       "D20",
       "D40"
     ],
-    "checkpoint_path": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\results\\IT23331518\\custom_cnn_model.keras",
-    "shared_manifest": "C:\\Users\\ASUS\\Desktop\\SLIIT\\Year 4\\Semester 2\\Deep Learning\\Assignment\\SE4050-Deep-Learning-Assignment\\results\\IT22064868\\metrics\\split_manifest.csv"
+    "checkpoint_path": "C:\\Users\\dhana\\Desktop\\Deep-Learning-Assignment\\DL Assignment\\SE4050-Deep-Learning-Assignment\\results\\IT23331518\\custom_cnn_model.keras",
+    "shared_manifest": "C:\\Users\\dhana\\Desktop\\Deep-Learning-Assignment\\DL Assignment\\SE4050-Deep-Learning-Assignment\\results\\IT22064868\\metrics\\split_manifest.csv"
   },
   "model": {
     "total_params": 5107652,

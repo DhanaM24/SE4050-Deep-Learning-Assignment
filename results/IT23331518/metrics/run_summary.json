@@ -16,16 +16,16 @@
     "frozen_params": 0,
     "backbone": "Custom CNN (from scratch, multi-label head)"
   },
-  "train_seconds": 1576.4,
+  "train_seconds": 2467.9,
   "computational": {
     "total_params": 5107652,
     "trainable_params": 5107652,
     "frozen_params": 0,
     "backbone": "Custom CNN (from scratch)",
     "feature_extraction_seconds": null,
-    "training_seconds": 1576.4,
-    "epochs_run": 21,
-    "best_epoch": 9,
+    "training_seconds": 2467.9,
+    "epochs_run": 24,
+    "best_epoch": 12,
     "checkpoint_mb": 61.35,
     "device": "CPU (TensorFlow 2.21, native Windows - no GPU support)"
   },

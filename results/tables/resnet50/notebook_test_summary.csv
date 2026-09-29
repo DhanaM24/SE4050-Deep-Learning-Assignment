@@ -1,0 +1,9 @@
+Metric,Value
+Test Loss,0.4545
+Test Accuracy,83.13%
+Macro Precision,84.02%
+Macro Recall,83.28%
+Macro F1-Score,83.62%
+Weighted Precision,83.31%
+Weighted Recall,83.13%
+Weighted F1-Score,83.19%
